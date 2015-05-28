@@ -2,7 +2,7 @@
 if (isset($_POST["accion"])) {
 
 	$accion = $_POST["accion"];
-	$route = "/var/www/leds/";
+	$route = "/var/www/html/leds/";
 
 	switch ($accion) {
 		case "AbrirPuerta16":
