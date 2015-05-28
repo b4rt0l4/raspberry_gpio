@@ -23,7 +23,7 @@ function createButtons ($buttonArray) {
 		<script type='text/javascript' src='./static/js/jquery-1.11.1.js'></script>
 		<script language="javascript">
 
-			var actualizar = function(objectID, action, gpiopin) {
+			var actualizar = function(objectID) {
 				document.getElementById(objectID).disabled = true;
 				var elem = objectID.split('-');
 				$.ajax({
