@@ -1,42 +1,50 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+
+function createButtons ($buttonArray) {
+	echo ('<table>');
+	foreach ($buttonArray as $button) {
+		echo ('<tr>');
+		echo ('<td>GpioPin '.$button.'</td>');
+		echo ('<td><input type="button" id="on-'.$button.'" value="On" onclick="javascript:actualizar(this.id);"></td>');
+		echo ('<td><input type="button" id="blink-'.$button.'" value="Blink" onclick="javascript:actualizar(this.id);"></td>');
+		echo ('<td><input type="button" id="off-'.$button.'" value="Off" onclick="javascript:actualizar(this.id);"></td>');
+		echo ('</tr>');
+	}
+	echo ('</table>');
+}
 ?>
 <html>
 	<head>
-		<!--/var/www/rele/index.php-->
 		<script type='text/javascript' src='jquery-1.11.1.js'></script>
 		<script language="javascript">
 
-			var actualizar=function(boton, action, gpiopin) {
-				document.getElementById(boton).disabled = true;
+			var actualizar = function(objectID, action, gpiopin) {
+				document.getElementById(objectID).disabled = true;
+				var elem = objectID.split('-');
 				$.ajax({
 					type: "POST",
-					url: "accion.php",
-					data: { accion: action, pin: gpiopin }
+					url: "gpiopin_action.php",
+					data: { action: elem[0], gpiopin: elem[1] }
 				})
 				.done(function( msg ) {
 					document.getElementById("rtn").innerHTML=msg;
 				})
 				.fail(function ( jqXHR, textStatus ) {
-					document.getElementById("rtn").innerHTML="Error en petición: "+textStatus;
+					document.getElementById("rtn").innerHTML="Request error: " + textStatus;
 				}).always(function() {
-					document.getElementById(boton).disabled = false;
+					document.getElementById(objectID).disabled = false;
 				});
 			}
 
 		</script>
 	</head>
 	<body>
-		<form action="accion.php" method="post">
-			Puerta 1
-			<input type="button" id="AbrirPuerta16" value="Abrir" onclick="javascript:actualizar(this.id, 'Abrir', 16);">
-			<input type="button" id="Parpadear16" value="Parpadear" onclick="javascript:actualizar(this.id, 'Parpadear', 16);">
-			<input type="button" id="CerrarPuerta16" value="Cerrar" onclick="javascript:actualizar(this.id, 'Cerrar', 16);">
-			<br>
-			Puerta 2
-			<input type="button" id="AbrirPuerta24" value="Abrir" onclick="javascript:actualizar('AbrirPuerta24', 'Abrir', 24);">
-			<input type="button" id="Parpadear24" value="Parpadear" onclick="javascript:actualizar('Parpadear24', 'Parpadear', 24);">
-			<input type="button" id="CerrarPuerta24" value="Cerrar" onclick="javascript:actualizar('CerrarPuerta24', 'Cerrar', 24);">
+		<form action="gpiopin_action.php" method="post">
+			<?php
+				$generalPurposeGpioPins = array (4,5,6,12,13,16,17,18,19,20,21,22,23,24,25,26,27);
+				createButtons($generalPurposeGpioPins);
+			?>			
 		</form>
 		<div id='rtn'>
 		</div>

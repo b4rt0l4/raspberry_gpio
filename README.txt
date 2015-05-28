@@ -4,7 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 This repository is a simple php proyect to manipulate gpio pins of a raspberryPi B+ using a web page.
-At this moment pins used are only 16 and 24 just only to test it. Same way can be done with the rest.
+You can assign the pins you want to manipulate on variable $generalPurposeGpioPins of file index.php.
 
 ### What is to be done in the future? ###
 Map with the status of all pin. (IN or OUT mode, 0 or 1 value... etc)
