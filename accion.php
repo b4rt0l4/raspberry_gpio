@@ -2,32 +2,18 @@
 if (isset($_POST["accion"])) {
 
 	$accion = $_POST["accion"];
+	$gpioPin = $_POST["pin"];
 	$route = "/var/www/html/leds/";
 
 	switch ($accion) {
-		case "AbrirPuerta16":
+		case "Abrir":
 			$command = "enciende.sh";
-			$gpioPin = 16;
 			break;
-		case "Parpadear16":
+		case "Parpadear":
 			$command = "parpadea.sh";
-			$gpioPin = 16;
 			break;
-		case "CerrarPuerta16":
+		case "Cerrar":
 			$command = "apaga.sh";
-			$gpioPin = 16;
-			break;
-		case "AbrirPuerta24":
-			$command = "enciende.sh";
-			$gpioPin = 24;
-			break;
-		case "Parpadear24":
-			$command = "parpadea.sh";
-			$gpioPin = 24;
-			break;
-		case "CerrarPuerta24":
-			$command = "apaga.sh";
-			$gpioPin = 24;
 			break;
 	}
 
