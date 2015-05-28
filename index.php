@@ -6,13 +6,18 @@ function getgeneralPurposeGpioPins () {
 }
 
 function createButtons ($buttonArray) {
-	echo ('<table>');
+	echo ('<table style="width: auto;" class="table table-striped table-condensed table-bordered">');
+	echo ('<th>Pin</th><th>Actions</th>');
 	foreach ($buttonArray as $button) {
 		echo ('<tr>');
 		echo ('<td>GpioPin '.$button.'</td>');
-		echo ('<td><input type="button" id="on-'.$button.'" value="On" onclick="javascript:actualizar(this.id);"></td>');
-		echo ('<td><input type="button" id="blink-'.$button.'" value="Blink" onclick="javascript:actualizar(this.id);"></td>');
-		echo ('<td><input type="button" id="off-'.$button.'" value="Off" onclick="javascript:actualizar(this.id);"></td>');
+		echo ('<td>');
+		echo ('<div class="btn-group" role="group">');
+		echo ('<button type="button" class="btn btn-default" id="on-'.$button.'" onclick="javascript:actualizar(this.id);">On</button>');
+		echo ('<button type="button" class="btn btn-default" id="blink-'.$button.'" onclick="javascript:actualizar(this.id);">Blink</button>');
+		echo ('<button type="button" class="btn btn-default" id="off-'.$button.'" onclick="javascript:actualizar(this.id);">Off</button>');		
+		echo ('</div>');
+		echo ('</td>');
 		echo ('</tr>');
 	}
 	echo ('</table>');
@@ -20,6 +25,13 @@ function createButtons ($buttonArray) {
 ?>
 <html>
 	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="./static/bootstrap-3.3.4-dist/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="./static/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="./static/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+			
 		<script type='text/javascript' src='./static/js/jquery-1.11.1.js'></script>
 		<script language="javascript">
 
@@ -32,10 +44,10 @@ function createButtons ($buttonArray) {
 					data: { action: elem[0], gpiopin: elem[1] }
 				})
 				.done(function( msg ) {
-					document.getElementById("rtn").innerHTML=msg;
+					document.getElementById("rtn").innerHTML = msg;
 				})
 				.fail(function ( jqXHR, textStatus ) {
-					document.getElementById("rtn").innerHTML="Request error: " + textStatus;
+					document.getElementById("rtn").innerHTML = "Request error: " + textStatus;
 				}).always(function() {
 					document.getElementById(objectID).disabled = false;
 				});
@@ -44,12 +56,24 @@ function createButtons ($buttonArray) {
 		</script>
 	</head>
 	<body>
-		<form action="gpiopin_action.php" method="post">
-			<?php
-				createButtons (getgeneralPurposeGpioPins());
-			?>
-		</form>
-		<div id='rtn'>
+		<div class="panel panel-default">
+		 	<div class="panel-heading">GPIO pin control with raspberry pi</div>
+		 		<div class="panel-body">
+		 			<p>
+		 				With this panel you can manipulate GPIO pins of a raspberry pi.
+		 				Actions that can be performed are put in ON, put in OFF and BLINK.
+		 			</p>
+		 			<div>
+		 				<span>Last action performed: </span><span id='rtn'></span>
+					</div>
+					<form action="gpiopin_action.php" method="post">
+						<?php
+						createButtons (getgeneralPurposeGpioPins());
+						?>
+					</form>
+
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

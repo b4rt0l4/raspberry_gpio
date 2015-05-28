@@ -19,9 +19,9 @@ if (isset($_POST["action"])) {
 
 	if ( (isset($command) && strlen($command) > 0) && (isset($gpioPin) && (is_numeric($gpioPin)))) {
 		exec("sh ".$route.$command." ".$gpioPin);
-        	print "Action ".$accion." executed.";
+        print "Action ".$accion." executed on pin ".$gpioPin.".";
 	} else {
-		print "Action ".$accion." is wrong. Can't be executed.";
+		print "Action ".$accion." is wrong. Can't be executed on pin ".$gpioPin.".";
 	}
 } else {
 	print "Error, no action provided";
