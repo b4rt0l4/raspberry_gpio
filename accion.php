@@ -1,33 +1,43 @@
 <?php
-if (isset($_POST["accion"]))
-{
-	$accion=$_POST["accion"];
-	if ($accion=="AbrirPuerta16") {
-		exec("sh /var/www/leds/enciende.sh 16");
+if (isset($_POST["accion"])) {
 
+	$accion = $_POST["accion"];
+	$route = "/var/www/leds/";
+
+	switch ($accion) {
+		case "AbrirPuerta16":
+			$command = "enciende.sh";
+			$gpioPin = 16;
+			break;
+		case "Parpadear16":
+			$command = "parpadea.sh";
+			$gpioPin = 16;
+			break;
+		case "CerrarPuerta16":
+			$command = "apaga.sh";
+			$gpioPin = 16;
+			break;
+		case "AbrirPuerta24":
+			$command = "enciende.sh";
+			$gpioPin = 24;
+			break;
+		case "Parpadear24":
+			$command = "parpadea.sh";
+			$gpioPin = 24;
+			break;
+		case "CerrarPuerta24":
+			$command = "apaga.sh";
+			$gpioPin = 24;
+			break;
 	}
 
-	if ($accion=="parpadear16") {
-		exec ("sh /var/www/leds/parpadea.sh 16");
+	if ( (isset($command) && strlen($command) > 0) && (isset($gpioPin) && (is_numeric($gpioPin)))) {
+		exec("sh ".$route.$command." ".$gpioPin);
+        	print "Acción ".$accion." ejecutada correctamente";
+	} else {
+		print "Acción ".$accion." incorrecta, no se pudo ejecutar";
 	}
-
-	if ($accion=="CerrarPuerta16") {
-		exec("sh /var/www/leds/apaga.sh 16");
-	}
-
-	// Funciones PHP del pin GPIO24
-	if ($accion=="AbrirPuerta24") {
-		exec("sh /var/www/leds/enciende.sh 24");
-	}
-
-	if ($accion=="parpadear24") {
-		exec("sh /var/www/leds/parpadea.sh 24");
-	}
-
-	if ($accion=="CerrarPuerta24"){
-		exec("sh /var/www/leds/apaga.sh 24");
-	}
-        print $accion . " llevada correctamente";
+} else {
+	print "Error, no viene Acción";
 }
-else print "Error, no viene Accion";
 ?>
