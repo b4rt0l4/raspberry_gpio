@@ -1,6 +1,10 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 
+function getgeneralPurposeGpioPins () {
+	return array (4,5,6,12,13,16,17,18,19,20,21,22,23,24,25,26,27);
+}
+
 function createButtons ($buttonArray) {
 	echo ('<table>');
 	foreach ($buttonArray as $button) {
@@ -42,9 +46,8 @@ function createButtons ($buttonArray) {
 	<body>
 		<form action="gpiopin_action.php" method="post">
 			<?php
-				$generalPurposeGpioPins = array (4,5,6,12,13,16,17,18,19,20,21,22,23,24,25,26,27);
-				createButtons($generalPurposeGpioPins);
-			?>			
+				createButtons (getgeneralPurposeGpioPins());
+			?>
 		</form>
 		<div id='rtn'>
 		</div>
