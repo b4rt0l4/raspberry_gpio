@@ -16,7 +16,7 @@ function createButtons ($buttonArray) {
 ?>
 <html>
 	<head>
-		<script type='text/javascript' src='jquery-1.11.1.js'></script>
+		<script type='text/javascript' src='./static/js/jquery-1.11.1.js'></script>
 		<script language="javascript">
 
 			var actualizar = function(objectID, action, gpiopin) {

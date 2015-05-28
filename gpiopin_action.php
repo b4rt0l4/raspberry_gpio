@@ -3,7 +3,7 @@ if (isset($_POST["action"])) {
 
 	$accion = $_POST["action"];
 	$gpioPin = $_POST["gpiopin"];
-	$route = "/var/www/html/leds/";
+	$route = "./commands/";
 
 	switch ($accion) {
 		case "on":
