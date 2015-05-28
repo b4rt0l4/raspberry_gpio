@@ -10,10 +10,12 @@ You can assign the pins you want to manipulate on variable function getgeneralPu
 Map with the status of all pin. (IN or OUT mode, 0 or 1 value... etc)
 Manipulate all the pins with buttons for each one.
 
-* https://bitbucket.org/b4rt0l4/raspberry_gpio_php
+* https://github.com/b4rt0l4/raspberry_gpio
 
 ### How do I get set up? ###
 Its necesary to have installed wiringpi libraries.
+Wiringpi it's a library to get gpio pins access with any user. So this way you 
+don't have to execute pin operations with sudo.
 Download and install from here:
 	Main page:  http://wiringpi.com/
 	Download and instructions: http://wiringpi.com/download-and-install/
