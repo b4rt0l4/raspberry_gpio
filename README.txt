@@ -11,7 +11,9 @@ returning the pins that you want in the array.
 Map with the status of all pin. (IN or OUT mode, 0 or 1 value... etc)
 Manipulate all the pins with buttons for each one.
 
+This project is hosted on GitHub and Bitbucket also.
 * https://github.com/b4rt0l4/raspberry_gpio
+* https://bitbucket.org/b4rt0l4/raspberry_gpio
 
 ### How do I get set up? ###
 Its necesary to have installed wiringpi libraries.
