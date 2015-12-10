@@ -34,6 +34,3 @@ it this content:
 * Deployment instructions
 - Just install wiringpi as described and copy this source code in your web server.
 
-- Modify variable $route on file action.php to assign it the path of the root directory
- for the application. Example: $route = "/var/www/html/leds/";
-
